@@ -1,21 +1,34 @@
-import React, { Component } from 'react';
-import logo from '../logo.svg';
+import React, {Component} from 'react';
+import { connect } from 'react-redux'
+
+import * as actions from '../actions';
 import './App.css';
+import Post from './Post'
 
 class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
-        </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
-    );
-  }
+    componentDidMount() {
+        this.props.fetchPosts();
+    }
+
+    render() {
+        return (
+            <div className="app-wrapper">
+                {this.props.posts.map((post, index) => {
+                        return <Post key={index} {...post} />;
+                    }
+                )}
+            </div>
+        );
+    }
 }
 
-export default App;
+function mapStateToProps(state, props) {
+    return {
+        posts: state.posts,
+    };
+}
+
+export default connect(
+    mapStateToProps,
+    actions
+)(App);
