@@ -1,34 +1,18 @@
-import React, {Component} from 'react';
-import { connect } from 'react-redux'
+import React, {Component} from 'react'
+import { Route } from 'react-router'
 
-import * as actions from '../actions';
-import './App.css';
-import Post from './Post'
+import FilteredPostList from '../containers/FilteredPostList'
+import './App.sass'
 
 class App extends Component {
-    componentDidMount() {
-        this.props.fetchPosts();
-    }
-
     render() {
         return (
-            <div className="app-wrapper">
-                {this.props.posts.map((post, index) => {
-                        return <Post key={index} {...post} />;
-                    }
-                )}
+            <div>
+                <Route path="/" exact component={FilteredPostList} />
+                <Route path="/category/:category" component={FilteredPostList} />
             </div>
         );
     }
 }
 
-function mapStateToProps(state, props) {
-    return {
-        posts: state.posts,
-    };
-}
-
-export default connect(
-    mapStateToProps,
-    actions
-)(App);
+export default App
