@@ -1,10 +1,17 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
+import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom';
 
+import * as actions from '../actions';
 import './Post.sass';
 
 class Post extends Component {
+    componentDidMount() {
+        this.props.fetchPost(this.props.id);
+    }
+
     render() {
-        const { title, body, voteScore } = this.props;
+        const { title, body, voteScore } = this.props.post;
         return (
             <div className="post">
                 <div className="container">
@@ -25,4 +32,15 @@ class Post extends Component {
     }
 }
 
-export default Post
+function mapStateToProps(state, { match }) {
+    const id = match.params.id;
+    return {
+        id,
+        post: state.post
+    };
+}
+
+export default withRouter(connect(
+    mapStateToProps,
+    actions
+)(Post));

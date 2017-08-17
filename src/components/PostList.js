@@ -1,14 +1,18 @@
 import React from 'react';
 
-import Post from './Post'
+import PostExcerpt from './PostExcerpt'
 import './PostList.sass';
 
 const PostList = ({ posts }) => (
     <div className="post-list">
-        {posts.map((post, index) => {
-                return <Post key={index} {...post} />;
-            }
-        )}
+        <div className="container">
+            {posts.map((post, index) => {
+                    return (
+                        <PostExcerpt key={index} {...post} />
+                    );
+                }
+            )}
+        </div>
     </div>
 );
 

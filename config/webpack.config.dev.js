@@ -203,7 +203,7 @@ module.exports = {
               {
                 loader: 'sass-resources-loader',
                 options: {
-                  resources: 'src/styles/lib/extends.sass'
+                  resources: ['src/styles/lib/extends.sass', 'src/styles/lib/mixins.sass', 'src/styles/variables.sass']
                 },
               },
             ],

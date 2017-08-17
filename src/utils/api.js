@@ -14,6 +14,10 @@ export const getAllPosts = () =>
     fetch(`${api}/posts/`, { headers })
         .then(res => res.json());
 
+export const getPost = (id) =>
+    fetch(`${api}/posts/${id}`, { headers })
+        .then(res => res.json());
+
 // export const getAll = () =>
 //     fetch(`${api}/books`, { headers })
 //         .then(res => res.json())
