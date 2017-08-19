@@ -4,6 +4,7 @@ import {withRouter} from 'react-router'
 import {Link} from 'react-router-dom'
 import startCase from 'lodash/startCase'
 
+import {getPost} from '../reducers'
 import './Breadcrumbs.sass'
 
 class Breadcrumbs extends React.Component {
@@ -58,12 +59,13 @@ class Breadcrumbs extends React.Component {
     }
 }
 
-function mapStateToProps(state, {location}) {
+function mapStateToProps(state, {location, match}) {
     const pathname = location.pathname;
-    const post = state.post;
+    const currentPostId = state.currentPostId;
     return {
         pathname,
-        post
+        post: getPost(state, currentPostId),
+        currentPostId
     };
 }
 

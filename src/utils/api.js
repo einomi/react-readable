@@ -10,13 +10,23 @@ const headers = {
     'Authorization': token
 };
 
-export const getAllPosts = () =>
-    fetch(`${api}/posts/`, { headers })
+export const fetchAllPosts = () =>
+    fetch(`${api}/posts/`, {headers})
         .then(res => res.json());
 
-export const getPost = (id) =>
-    fetch(`${api}/posts/${id}`, { headers })
+export const fetchPost = (id) =>
+    fetch(`${api}/posts/${id}`, {headers})
         .then(res => res.json());
+
+export const changeVoteScore = (id, option) =>
+    fetch(`${api}/posts/${id}`, {
+        method: 'POST',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ option })
+    }).then(res => res.json());
 
 // export const getAll = () =>
 //     fetch(`${api}/books`, { headers })

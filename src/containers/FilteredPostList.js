@@ -3,6 +3,7 @@ import {connect} from 'react-redux'
 import {withRouter} from 'react-router-dom';
 
 import * as actions from '../actions';
+import { getFilteredPosts } from '../reducers'
 import PostList from '../components/PostList'
 
 class FilteredPostList extends Component {
@@ -17,18 +18,10 @@ class FilteredPostList extends Component {
     }
 }
 
-function getFilteredPosts(posts, category) {
-    if (category) {
-        return posts.filter(post => post.category === category);
-    }
-
-    return posts;
-}
-
 function mapStateToProps(state, {match}) {
     const category = match.params.category;
     return {
-        posts: getFilteredPosts(state.posts, category),
+        posts: getFilteredPosts(state, category),
     };
 }
 
