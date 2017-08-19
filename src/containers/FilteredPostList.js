@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import { connect } from 'react-redux'
-import { withRouter } from 'react-router-dom';
+import {connect} from 'react-redux'
+import {withRouter} from 'react-router-dom';
 
 import * as actions from '../actions';
 import PostList from '../components/PostList'
@@ -11,9 +11,9 @@ class FilteredPostList extends Component {
     }
 
     render() {
-        const { posts } = this.props;
+        const {posts} = this.props;
 
-        return <PostList posts={posts} />;
+        return <PostList posts={posts}/>;
     }
 }
 
@@ -25,7 +25,7 @@ function getFilteredPosts(posts, category) {
     return posts;
 }
 
-function mapStateToProps(state, { match }) {
+function mapStateToProps(state, {match}) {
     const category = match.params.category;
     return {
         posts: getFilteredPosts(state.posts, category),

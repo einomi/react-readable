@@ -1,0 +1,20 @@
+.breadcrumbs
+	margin-bottom: 25px
+	&__item
+		position: relative
+		font-size: 14px
+		color: $color-link
+		margin-right: 15px
+		&:after
+			content: "\f105"
+			display: inline-block
+			position: absolute
+			right: -10px
+			top: 4px
+			font-size: 12px
+			font-family: "FontAwesome"
+		&:last-child
+			pointer-events: none
+			color: $color-dark
+			&:after
+				display: none

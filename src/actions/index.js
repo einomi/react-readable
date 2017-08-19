@@ -4,6 +4,7 @@ export const FETCH_POSTS_SUCCESS = 'FETCH_POSTS_SUCCESS';
 export const FETCH_POSTS_FAILURE = 'FETCH_POSTS_FAILURE';
 export const FETCH_POST_SUCCESS = 'FETCH_POST_SUCCESS';
 export const FETCH_POST_FAILURE = 'FETCH_POST_FAILURE';
+export const SORT_POSTS = 'SORT_POSTS';
 
 const ERROR_MESSAGE = 'Something went wrong.';
 
@@ -37,4 +38,11 @@ export const fetchPost = (id) => dispatch => {
             });
         }
     );
+};
+
+export const sortPosts = (param) => {
+    return {
+        type: SORT_POSTS,
+        param: param
+    };
 };
