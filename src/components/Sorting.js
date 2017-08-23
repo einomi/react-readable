@@ -22,7 +22,7 @@ class Sorting extends Component {
     }
 }
 
-function mapStateToProps(state, {match}) {
+function mapStateToProps(state, { match }) {
 //     const id = match.params.id;
     return {
 //         id,

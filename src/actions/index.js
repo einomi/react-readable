@@ -5,8 +5,7 @@ export const FETCH_POSTS_FAILURE = 'FETCH_POSTS_FAILURE';
 export const FETCH_POST_SUCCESS = 'FETCH_POST_SUCCESS';
 export const FETCH_POST_FAILURE = 'FETCH_POST_FAILURE';
 export const SORT_POSTS = 'SORT_POSTS';
-export const INCREASE_VOTE_SCORE_SUCCESS = 'INCREASE_VOTESCORE_SUCCESS';
-export const DESCREASE_VOTE_SCORE_SUCCESS = 'INCREASE_VOTESCORE_SUCCESS';
+export const CHANGE_VOTE_SCORE_SUCCESS = 'CHANGE_VOTESCORE_SUCCESS';
 export const CHANGE_VOTE_SCORE_FAILURE = 'CHANGE_VOTESCORE_FAILURE';
 
 const ERROR_MESSAGE = 'Something went wrong.';
@@ -50,12 +49,15 @@ export const sortPosts = (param) => {
     };
 };
 
-export const changeVoteScore = (id, option) => dispatch => {
-    api.changeVoteScore(id, option).then(
-        () => {
+export const changeVoteScore = (entryType, entryId, userId, option) => dispatch => {
+    api.changeVoteScore(entryId, userId, option).then(
+        (data) => {
             dispatch({
-                type: INCREASE_VOTE_SCORE_SUCCESS,
-                id,
+                type: CHANGE_VOTE_SCORE_SUCCESS,
+                entryType,
+                entryId,
+                userId,
+                option
             });
         }, error => {
             dispatch({

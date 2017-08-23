@@ -1,6 +1,6 @@
 import sortBy from 'sort-by'
 
-import {FETCH_POSTS_SUCCESS, SORT_POSTS, FETCH_POST_SUCCESS, INCREASE_VOTE_SCORE_SUCCESS} from '../actions'
+import { FETCH_POSTS_SUCCESS, SORT_POSTS, FETCH_POST_SUCCESS, CHANGE_VOTE_SCORE_SUCCESS } from '../actions'
 
 const posts = (state = [], action) => {
     switch (action.type) {
@@ -10,17 +10,36 @@ const posts = (state = [], action) => {
             let newState = [...state];
             newState.sort(sortBy(action.param));
             return newState;
-        case FETCH_POST_SUCCESS:
-            if (state.length) {
+        case CHANGE_VOTE_SCORE_SUCCESS:
+            if (action.entryType !== 'post') {
                 return state;
             }
-            return [action.post];
-        case INCREASE_VOTE_SCORE_SUCCESS:
-            return state.map((item, index) => {
-                if (item.id === action.id) {
-                    item.voteScore += 1;
+
+            return state.map(post => {
+                if (!(post.id === action.entryId)) {
+                    return post;
                 }
-                return item;
+
+                let howUserVoted;
+
+                if (post.usersVoted) {
+                    howUserVoted = post.usersVoted[action.userId];
+                } else {
+                    post.usersVoted = {};
+                }
+
+                if (howUserVoted && action.option === howUserVoted) {
+                    return post;
+                } else {
+                    action.option == 'upVote' ? post.voteScore += 1 : post.voteScore -= 1;
+                    if (howUserVoted) {
+                        delete post.usersVoted[action.userId];
+                    } else {
+                        post.usersVoted[action.userId] = action.option;
+                    }
+                }
+
+               return post;
             });
         default:
             return state;

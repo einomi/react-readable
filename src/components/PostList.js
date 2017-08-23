@@ -10,7 +10,7 @@ const PostList = ({posts}) => (
             <Sorting />
             {posts.map((post, index) => {
                     return (
-                        <PostExcerpt key={index} className="post-list__item" {...post} />
+                        <PostExcerpt key={index} className="post-list__item" post={post} />
                     );
                 }
             )}
