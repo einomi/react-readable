@@ -10,7 +10,12 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 const store = createStore(rootReducer, {
-        user: 'fakeUserId' // Authentication/authorization is not implemented in this app
+        user: { // Fake user. Authentication/authorization is not implemented in this app
+            id: 'fakeUserId', voted: {
+                post: {},
+                comment: {}
+            }
+        }
     },
     applyMiddleware(...middlewares));
 

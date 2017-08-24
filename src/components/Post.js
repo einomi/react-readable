@@ -12,22 +12,14 @@ class Post extends Component {
         this.props.fetchPost(this.props.id);
     }
 
-    // shouldComponentUpdate(nextProps, nextState) {
-    //     console.log('should', nextProps.post);
-    //     if (this.props.post.voteScore !== nextProps.post.voteScore) {
-    //         return true;
-    //     }
-    //     return false;
-    // }
-
     render() {
-        const {id, timestamp, voteScore, title, body} = this.props.post;
+        const {title, body} = this.props.post;
         return (
             <div className="post">
                 <div className="container">
                     <header className="post__header">
                         <h1 className="post__title title">{title}</h1>
-                        <PostSpecs className="post__specs" id={id} timestamp={timestamp} voteScore={voteScore} />
+                        <PostSpecs className="post__specs" post={this.props.post} />
                     </header>
                     <div className="post__content">
                         <p className="post__text text">{body}</p>
@@ -43,7 +35,7 @@ function mapStateToProps(state, {match}) {
     return {
         id,
         posts: state.posts,
-        post: getPost(state, id)
+        post: state.post
     };
 }
 

@@ -8,20 +8,16 @@ import './Voting.sass'
 
 const UP_VOTE = 'upVote';
 const DOWN_VOTE = 'downVote';
-const POST = 'post';
-const COMMENT = 'comment';
 
 class Voting extends Component {
     static propTypes = {
         entryType: PropTypes.string.isRequired,
         entry: PropTypes.object.isRequired,
-        user: PropTypes.string.isRequired,
-        posts: PropTypes.array,
-        comments: PropTypes.array,
+        user: PropTypes.object.isRequired,
     };
 
     state = {
-        howUserVoted: ''
+        howUserVoted: undefined
     };
 
     componentDidUpdate() {
@@ -29,22 +25,16 @@ class Voting extends Component {
     }
 
     _updateVotingState() {
-        const { entryType, user, entry } = this.props;
-        const entryId = entry.id;
-        const entries = entryType == POST ? this.props.posts : this.props.comments;
-        const currentEntry = entries.find(entry => entry.id === entryId);
-        if (!currentEntry || !currentEntry.usersVoted) {
-            return;
-        }
-        const howUserVoted = currentEntry.usersVoted[user];
+        const { user, entry, entryType } = this.props;
+        const howUserVoted = user.voted[entryType][entry.id];
         if (this.state.howUserVoted !== howUserVoted) {
             this.setState({howUserVoted});
         }
     }
 
-    handleButtonClick(option) {
+    handleButtonClick(howUserVoted) {
         const { entryType, entry, user } = this.props;
-        this.props.changeVoteScore(entryType, entry.id, user, option);
+        this.props.changeVoteScore(entryType, entry.id, user, howUserVoted);
     }
 
     render() {
@@ -62,7 +52,6 @@ class Voting extends Component {
 const mapStateToProps = (state) => {
     return {
         user: state.user,
-        posts: state.posts
     };
 };
 

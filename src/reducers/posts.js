@@ -16,31 +16,39 @@ const posts = (state = [], action) => {
             }
 
             return state.map(post => {
-                if (!(post.id === action.entryId)) {
-                    return post;
+                if (post.id === action.entry.id) {
+                    return action.entry;
                 }
-
-                let howUserVoted;
-
-                if (post.usersVoted) {
-                    howUserVoted = post.usersVoted[action.userId];
-                } else {
-                    post.usersVoted = {};
-                }
-
-                if (howUserVoted && action.option === howUserVoted) {
-                    return post;
-                } else {
-                    action.option == 'upVote' ? post.voteScore += 1 : post.voteScore -= 1;
-                    if (howUserVoted) {
-                        delete post.usersVoted[action.userId];
-                    } else {
-                        post.usersVoted[action.userId] = action.option;
-                    }
-                }
-
-               return post;
+                return post;
             });
+
+            // return state.map(post => {
+            //     if (!(post.id === action.entryId)) {
+            //         return post;
+            //     }
+            //
+            //     let howUserVoted;
+            //
+            //     if (post.usersVoted) {
+            //         howUserVoted = post.usersVoted[action.userId];
+            //     } else {
+            //         post.usersVoted = {};
+            //     }
+            //
+            //     if (howUserVoted && action.option === howUserVoted) {
+            //         return post;
+            //     } else {
+            //         action.option == 'upVote' ? post.voteScore += 1 : post.voteScore -= 1;
+            //         if (howUserVoted) {
+            //             delete post.usersVoted[action.userId];
+            //         } else {
+            //             post.usersVoted[action.userId] = action.option;
+            //         }
+            //     }
+
+               // return post;
+            // }
+            // );
         default:
             return state;
     }

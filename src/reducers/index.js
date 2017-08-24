@@ -1,11 +1,11 @@
 import { combineReducers } from "redux";
 import posts, * as fromPosts from './posts'
-import currentPostId from './currentPostId'
+import post from './post'
 import user from './user'
 
 const rootReducer = combineReducers({
     posts,
-    currentPostId,
+    post,
     user
 });
 

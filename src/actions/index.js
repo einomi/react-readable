@@ -50,13 +50,14 @@ export const sortPosts = (param) => {
 };
 
 export const changeVoteScore = (entryType, entryId, userId, option) => dispatch => {
-    api.changeVoteScore(entryId, userId, option).then(
-        (data) => {
+    api.changeVoteScore(entryId, option).then(
+        entry => {
             dispatch({
                 type: CHANGE_VOTE_SCORE_SUCCESS,
+                entry: entry,
                 entryType,
                 entryId,
-                userId,
+                // userId,
                 option
             });
         }, error => {
