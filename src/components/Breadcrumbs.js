@@ -4,7 +4,6 @@ import {withRouter} from 'react-router'
 import {Link} from 'react-router-dom'
 import startCase from 'lodash/startCase'
 
-import {getPost} from '../reducers'
 import './Breadcrumbs.sass'
 
 class Breadcrumbs extends React.Component {
@@ -23,7 +22,7 @@ class Breadcrumbs extends React.Component {
                     });
                     break;
                 case 1:
-                    if (item == '') {
+                    if (item === '') {
                         return;
                     }
                     items.push({

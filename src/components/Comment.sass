@@ -1,0 +1,29 @@
+.comment
+	position: relative
+	border-radius: 8px
+	border: 1px solid #eee
+	padding: 13px 15px 15px
+	&__head
+		margin-bottom: 9px
+	&__author
+		font-weight: 600
+		font-size: 14px
+		margin-bottom: 3px
+		color: #333
+	&__date
+		font-size: 13px
+	&__content
+		font-size: 14px
+		
+.comment-head
+	@extend %clearfix
+	&__item
+		float: left
+		margin-right: 15px
+		color: $color-grey
+		font-size: 14px
+		&:last-child
+			margin-right: 0
+	&__voting
+		position: relative
+		top: -2px

@@ -1,5 +1,4 @@
 import React, {Component} from 'react'
-import { Route } from 'react-router'
 import  { renderRoutes } from 'react-router-config'
 
 import Header from './Header'

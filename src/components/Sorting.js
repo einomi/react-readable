@@ -22,21 +22,8 @@ class Sorting extends Component {
     }
 }
 
-function mapStateToProps(state, { match }) {
-//     const id = match.params.id;
-    return {
-//         id,
-//         posts: state.posts
-    };
-}
-
-function mapDispatchToProps(dispatch) {
-    return {
-        sortPosts: (param) => dispatch(actions.sortPosts(param))
-    };
-}
-
 export default withRouter(connect(
-    mapStateToProps,
-    mapDispatchToProps
+    null, {
+        sortPosts: actions.sortPosts
+    }
 )(Sorting));

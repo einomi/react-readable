@@ -11,14 +11,14 @@ const headers = {
 };
 
 export const fetchAllPosts = () =>
-    fetch(`${api}/posts/`, {headers})
+    fetch(`${api}/posts/`, { headers })
         .then(res => res.json());
 
 export const fetchPost = (id) =>
-    fetch(`${api}/posts/${id}`, {headers})
+    fetch(`${api}/posts/${id}`, { headers })
         .then(res => res.json());
 
-export const changeVoteScore = (id, option) =>
+export const changePostVoteScore = (id, option) =>
     fetch(`${api}/posts/${id}`, {
         method: 'POST',
         headers: {
@@ -28,28 +28,36 @@ export const changeVoteScore = (id, option) =>
         body: JSON.stringify({ option })
     }).then(res => res.json());
 
-// export const getAll = () =>
-//     fetch(`${api}/books`, { headers })
-//         .then(res => res.json())
-//         .then(data => data.books);
-//
-// export const update = (book, shelf) =>
-//     fetch(`${api}/books/${book.id}`, {
-//         method: 'PUT',
-//         headers: {
-//             ...headers,
-//             'Content-Type': 'application/json'
-//         },
-//         body: JSON.stringify({ shelf })
-//     }).then(res => res.json());
-//
-// export const search = (query, maxResults) =>
-//     fetch(`${api}/search`, {
-//         method: 'POST',
-//         headers: {
-//             ...headers,
-//             'Content-Type': 'application/json'
-//         },
-//         body: JSON.stringify({ query, maxResults })
-//     }).then(res => res.json())
-//         .then(data => data.books);
+export const changeCommentVoteScore = (id, option) =>
+    fetch(`${api}/comments/${id}`, {
+        method: 'POST',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ option })
+    }).then(res => res.json());
+
+export const fetchComments = (id) =>
+    fetch(`${api}/posts/${id}/comments`, { headers })
+        .then(res => res.json());
+
+export const addComment = (data) =>
+    fetch(`${api}/comments`, {
+        method: 'POST',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    }).then(res => res.json());
+
+export const editComment = (id, data) =>
+    fetch(`${api}/comments/${id}`, {
+        method: 'PUT',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    }).then(res => res.json());

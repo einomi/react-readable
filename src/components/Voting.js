@@ -13,7 +13,6 @@ class Voting extends Component {
     static propTypes = {
         entryType: PropTypes.string.isRequired,
         entry: PropTypes.object.isRequired,
-        user: PropTypes.object.isRequired,
     };
 
     state = {
@@ -40,10 +39,10 @@ class Voting extends Component {
     render() {
         const { voteScore } = this.props.entry;
         return (
-            <div className="post-specs__item voting">
-                <div className={classNames('voting__button', '_down', { '_active': this.state.howUserVoted == DOWN_VOTE })} onClick={() => this.handleButtonClick(DOWN_VOTE)}></div>
+            <div className={classNames(this.props.className, 'voting')}>
+                <div className={classNames('voting__button', '_down', { '_active': this.state.howUserVoted === DOWN_VOTE })} onClick={() => this.handleButtonClick(DOWN_VOTE)}></div>
                 <div className="voting__score">{voteScore}</div>
-                <div className={classNames('voting__button', '_up', { '_active': this.state.howUserVoted == UP_VOTE })} onClick={() => this.handleButtonClick(UP_VOTE)}></div>
+                <div className={classNames('voting__button', '_up', { '_active': this.state.howUserVoted === UP_VOTE })} onClick={() => this.handleButtonClick(UP_VOTE)}></div>
             </div>
         );
     }

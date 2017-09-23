@@ -1,6 +1,6 @@
 import sortBy from 'sort-by'
 
-import { FETCH_POSTS_SUCCESS, SORT_POSTS, FETCH_POST_SUCCESS, CHANGE_VOTE_SCORE_SUCCESS } from '../actions'
+import { FETCH_POSTS_SUCCESS, SORT_POSTS, CHANGE_VOTE_SCORE_SUCCESS } from '../actions'
 
 const posts = (state = [], action) => {
     switch (action.type) {

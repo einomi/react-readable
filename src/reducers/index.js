@@ -2,11 +2,13 @@ import { combineReducers } from "redux";
 import posts, * as fromPosts from './posts'
 import post from './post'
 import user from './user'
+import comments from './comments'
 
 const rootReducer = combineReducers({
     posts,
     post,
-    user
+    user,
+    comments
 });
 
 export const getFilteredPosts = (state, category) =>

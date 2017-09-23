@@ -180,11 +180,19 @@ module.exports = {
                                     ],
                                 },
                             },
-                            'sass-loader',
+                            {
+                                loader: 'sass-loader?' + JSON.stringify({
+                                    includePaths: [
+                                        paths.appStyles,
+                                    ]
+                                })
+                            },
                             {
                                 loader: 'sass-resources-loader',
                                 options: {
-                                    resources: ['src/styles/lib/extends.sass', 'src/styles/lib/mixins.sass', 'src/styles/variables.sass']
+                                    resources: [
+                                        paths.stylesLib,
+                                    ]
                                 },
                             },
                         ],

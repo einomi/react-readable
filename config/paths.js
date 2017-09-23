@@ -44,6 +44,8 @@ module.exports = {
   appBuild: resolveApp('build'),
   appPublic: resolveApp('public'),
   appHtml: resolveApp('public/index.html'),
+  appStyles: resolveApp('src/styles'),
+  stylesLib: resolveApp('src/styles/lib/index.sass'),
   appIndexJs: resolveApp('src/index.js'),
   appPackageJson: resolveApp('package.json'),
   appSrc: resolveApp('src'),
