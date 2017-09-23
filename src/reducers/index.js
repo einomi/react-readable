@@ -3,12 +3,16 @@ import posts, * as fromPosts from './posts'
 import post from './post'
 import user from './user'
 import comments from './comments'
+import categories from './categories'
+import form from './form'
 
 const rootReducer = combineReducers({
     posts,
     post,
     user,
-    comments
+    comments,
+    categories,
+    form
 });
 
 export const getFilteredPosts = (state, category) =>

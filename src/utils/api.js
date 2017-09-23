@@ -61,3 +61,17 @@ export const editComment = (id, data) =>
         },
         body: JSON.stringify(data)
     }).then(res => res.json());
+
+export const fetchCategories = () =>
+    fetch(`${api}/categories/`, { headers })
+        .then(res => res.json());
+
+export const addPost = (data) =>
+    fetch(`${api}/posts`, {
+        method: 'POST',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    }).then(res => res.json());

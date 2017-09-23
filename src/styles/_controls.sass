@@ -1,5 +1,19 @@
+.i-text
+	@extend %input-common
+	width: $input-width
+	height: $input-height
+	// Turn off iPhone/Safari input element rounding:
+	-webkit-appearance: none
+	
+.i-select
+	@extend %input-common
+	width: $input-width
+	height: $input-height
+	&:focus
+		outline: none
+
 .i-textarea
 	@extend %input-common
 	min-height: 80px
-	padding: 8px 15px
-	font-size: 14px
+	padding-top: 8px
+	padding-bottom: 8px

@@ -1,6 +1,11 @@
 import sortBy from 'sort-by'
 
-import { FETCH_POSTS_SUCCESS, SORT_POSTS, CHANGE_VOTE_SCORE_SUCCESS } from '../actions'
+import {
+    FETCH_POSTS_SUCCESS,
+    SORT_POSTS,
+    CHANGE_VOTE_SCORE_SUCCESS,
+    ADD_POST_SUCCESS
+} from '../actions'
 
 const posts = (state = [], action) => {
     switch (action.type) {
@@ -21,34 +26,11 @@ const posts = (state = [], action) => {
                 }
                 return post;
             });
-
-            // return state.map(post => {
-            //     if (!(post.id === action.entryId)) {
-            //         return post;
-            //     }
-            //
-            //     let howUserVoted;
-            //
-            //     if (post.usersVoted) {
-            //         howUserVoted = post.usersVoted[action.userId];
-            //     } else {
-            //         post.usersVoted = {};
-            //     }
-            //
-            //     if (howUserVoted && action.option === howUserVoted) {
-            //         return post;
-            //     } else {
-            //         action.option == 'upVote' ? post.voteScore += 1 : post.voteScore -= 1;
-            //         if (howUserVoted) {
-            //             delete post.usersVoted[action.userId];
-            //         } else {
-            //             post.usersVoted[action.userId] = action.option;
-            //         }
-            //     }
-
-               // return post;
-            // }
-            // );
+        case ADD_POST_SUCCESS:
+            return [
+                ...state,
+                action.addedPost
+            ];
         default:
             return state;
     }
@@ -63,6 +45,6 @@ export const getFilteredPosts = (state, category) => {
 };
 
 export const getPost = (state, id) =>
-    state.length && state.filter(post => post.id === id)[0];
+state.length && state.filter(post => post.id === id)[0];
 
 export default posts

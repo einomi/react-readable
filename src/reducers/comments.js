@@ -14,7 +14,7 @@ const comments = (state = [], action) => {
                 return state;
             }
             return state.map((comment) =>
-                comment.id == action.entry.id
+                comment.id === action.entry.id
                     ? action.entry
                     : comment
             );
@@ -25,7 +25,7 @@ const comments = (state = [], action) => {
             ];
         case EDIT_COMMENT_SUCCESS:
             return state.map((comment) =>
-                    comment.id == action.editedComment.id
+                    comment.id === action.editedComment.id
                         ? action.editedComment
                         : comment
                 );

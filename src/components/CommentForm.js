@@ -14,30 +14,24 @@ class CommentForm extends Component {
             author: this.props.user.name,
             parentId: this.props.post.id
         };
-        this.props.send(data);
+        this.props.addComment(data);
     };
-    
+
     render() {
         return (
             <form action="" className="form" onSubmit={this._onSend}>
                 <div className="form__title">Add new comment</div>
                 <textarea name="message" className="form__input i-textarea" required ref={input => this.messageInput = input}></textarea>
-                <button className="button">Send</button>
+                <button className="button">Add</button>
             </form>
         );
     }
 }
 
-const mapStateToProps = (state) => ({
-    post: state.post,
-    user: state.user
-});
-
-const mapDispatchToProps = {
-    send: actions.addComment,
-};
-
 export default connect(
-    mapStateToProps,
-    mapDispatchToProps
+    (state) => ({
+        post: state.post,
+        user: state.user
+    }),
+    actions
 )(CommentForm);
