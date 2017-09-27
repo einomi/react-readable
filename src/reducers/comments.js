@@ -25,10 +25,10 @@ const comments = (state = [], action) => {
             ];
         case EDIT_COMMENT_SUCCESS:
             return state.map((comment) =>
-                    comment.id === action.editedComment.id
-                        ? action.editedComment
-                        : comment
-                );
+                comment.id === action.editedComment.id
+                    ? action.editedComment
+                    : comment
+            );
         default:
             return state;
     }

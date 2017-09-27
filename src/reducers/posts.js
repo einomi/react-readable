@@ -4,7 +4,8 @@ import {
     FETCH_POSTS_SUCCESS,
     SORT_POSTS,
     CHANGE_VOTE_SCORE_SUCCESS,
-    ADD_POST_SUCCESS
+    ADD_POST_SUCCESS,
+    EDIT_POST_SUCCESS
 } from '../actions'
 
 const posts = (state = [], action) => {
@@ -31,6 +32,10 @@ const posts = (state = [], action) => {
                 ...state,
                 action.addedPost
             ];
+        case EDIT_POST_SUCCESS:
+            return state.map((post, index) =>
+                post.id === action.editedPost.id ? action.editedPost : post
+            );
         default:
             return state;
     }

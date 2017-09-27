@@ -4,7 +4,7 @@ import post from './post'
 import user from './user'
 import comments from './comments'
 import categories from './categories'
-import form from './form'
+import { reducer as formReducer } from 'redux-form'
 
 const rootReducer = combineReducers({
     posts,
@@ -12,7 +12,7 @@ const rootReducer = combineReducers({
     user,
     comments,
     categories,
-    form
+    form: formReducer,
 });
 
 export const getFilteredPosts = (state, category) =>

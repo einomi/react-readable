@@ -180,7 +180,22 @@ export const addPost = (data) => dispatch => {
     );
 };
 
-
 export const addPostSuccessMessageShown = () => ({
     type: ADD_POST_SUCCESS_MESSAGE_SHOWN
 });
+
+export const editPost = (id, data) => dispatch => {
+    return api.editPost(id, data).then(
+        editedPost => {
+            dispatch({
+                type: EDIT_POST_SUCCESS,
+                editedPost
+            });
+        }, error => {
+            dispatch({
+                type: EDIT_POST_FAILURE,
+                message: error.message || ERROR_MESSAGE,
+            });
+        }
+    );
+};

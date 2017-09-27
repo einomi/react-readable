@@ -1,65 +1,46 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import uuidv4 from 'uuid/v4'
-import { Redirect } from 'react-router'
+// import { Redirect } from 'react-router'
+import { Field } from 'redux-form'
 
 import * as actions from '../actions'
+import FieldGroup from './FieldGroup'
+import { required, categoryRequired } from '../utils/validation'
 
 class PostForm extends Component {
     componentDidMount() {
         this.props.fetchCategories();
     }
 
-    _onSend = (e) => {
-        e.preventDefault();
-        let data = {
-            id: uuidv4(),
-            timestamp: +new Date(),
-            title: this.titleInput.value,
-            category: this.categoryInput.value,
-            body: this.bodyInput.value,
-            author: this.props.user.name,
-        };
-        this.props.addPost(data);
-    };
+    renderCategory() {
+        return (
+            <Field component={FieldGroup} inputType="select" id="category" name="category" label="Category" className="form__input i-select" validate={[categoryRequired]}>
+                <option value="none" disabled>Select category</option>
+                {this.props.categories.map((category, index) => (
+                    <option key={index} value={category.path}>{category.name}</option>
+                ))}
+            </Field>
+        );
+    }
 
     render() {
+        const { onSubmit, mode } = this.props;
         return (
-            <div>
-                {this.props.form.addPostSuccess && <Redirect to="/add-post/success"/>}
-
-                <form action="" className="form" onSubmit={this._onSend}>
-                    <div className="form__groups">
-                        <div className="form__group">
-                            <label htmlFor="title" className="form__label">Title</label>
-                            <input id="title" name="title" type="text" className="i-text" required ref={input => this.titleInput = input}/>
-                        </div>
-                        <div className="form__group">
-                            <label htmlFor="category" className="form__label">Category</label>
-                            <select id="category" name="category" className="i-select" required ref={select => this.categoryInput = select}>
-                                {this.props.categories.map((category, index) => (
-                                    <option key={index} value={category.path}>{category.name}</option>
-                                ))}
-                            </select>
-                        </div>
-                        <div className="form__group">
-                            <label htmlFor="body" className="form__label">Body</label>
-                            <textarea id="body" name="body" className="form__input i-textarea" required ref={input => this.bodyInput = input}></textarea>
-                        </div>
-                    </div>
-                    <button className="button">Add</button>
-                </form>
-            </div>
+            <form action="" className="form" onSubmit={onSubmit} method="PUT">
+                <div className="form__groups">
+                    <Field component={FieldGroup} inputType="input" type="text" name="title" label="Title" className="form__input i-text" validate={[required]} />
+                    {mode === 'add' && this.renderCategory()}
+                    <Field component={FieldGroup} inputType="textarea" id="body" name="body" label="Body" className="form__input i-textarea" validate={[required]} />
+                </div>
+                <button className="button">{ mode === 'add' ? 'Add' : 'Save'}</button>
+            </form>
         );
     }
 }
 
 export default connect(
-    (state) => ({
+    state => ({
         categories: state.categories,
-        post: state.post,
-        user: state.user,
-        form: state.form
     }),
     actions
 )(PostForm);

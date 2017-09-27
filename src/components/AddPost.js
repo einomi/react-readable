@@ -1,15 +1,16 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
-import PostForm from './PostForm'
+import PostAddForm from './PostAddForm'
+import * as actions from '../actions'
 
 class AddPost extends Component {
     render() {
         return (
-            <div className="page">
+            <div className="page-add-post page">
                 <div className="container">
                     <h1 className="page__title title">Add post</h1>
-                    <PostForm className="add-post__form"/>
+                    <PostAddForm className="page-add-post__form" />
                 </div>
             </div>
         );
@@ -17,4 +18,6 @@ class AddPost extends Component {
 }
 
 export default connect(
+    null,
+    actions
 )(AddPost)

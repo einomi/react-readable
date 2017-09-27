@@ -9,7 +9,8 @@ if (process.env.NODE_ENV !== 'production') {
     middlewares.push(logger);
 }
 
-const store = createStore(rootReducer, {
+const store = createStore(rootReducer,
+    {
         user: { // Fake user. Authentication/authorization is not implemented in this app
             id: 'fakeUserId',
             name: 'Andrew',
@@ -19,6 +20,7 @@ const store = createStore(rootReducer, {
             },
         }
     },
-    applyMiddleware(...middlewares));
+    applyMiddleware(...middlewares)
+);
 
 export default store

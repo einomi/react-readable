@@ -58,15 +58,9 @@ class Comment extends React.Component {
     }
 }
 
-const mapStateToProps = (state) => ({
-    user: state.user
-});
-
-const mapDispatchToProps = {
-    save: actions.editComment,
-};
-
 export default connect(
-    mapStateToProps,
-    mapDispatchToProps
+    (state) => ({
+        user: state.user
+    }),
+    actions
 )(Comment);
