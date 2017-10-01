@@ -1,30 +1,38 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import {withRouter} from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
+import { Redirect } from 'react-router'
 import { reduxForm } from 'redux-form'
 
 import PostForm from './PostForm'
 import * as actions from '../actions'
 
 class PostEditForm extends Component {
+    state = {
+        successRedirect: false
+    };
+
     componentDidMount() {
         this.props.fetchPost(this.props.id);
     }
 
     submit = values => {
-        this.props.editPost(this.props.id, values);
+        this.props.editPost(this.props.id, values).then(() => this.setState({successRedirect: true}));
     };
 
     render() {
         return (
-            <PostForm mode="edit" onSubmit={this.props.handleSubmit(this.submit)} />
+            <div>
+                {this.state.successRedirect && <Redirect to="/edit-post/success"/>}
+                <PostForm mode="edit" onSubmit={this.props.handleSubmit(this.submit)}/>
+            </div>
         );
     }
 }
 
 PostEditForm = reduxForm({
     form: 'post-edit',
-    enableReinitialize: true
+    enableReinitialize: true,
 })(PostEditForm);
 
 const mapStateToProps = (state, { match }) => {

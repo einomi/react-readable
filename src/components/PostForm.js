@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-// import { Redirect } from 'react-router'
 import { Field } from 'redux-form'
 
 import * as actions from '../actions'
@@ -22,6 +21,10 @@ class PostForm extends Component {
             </Field>
         );
     }
+
+    onSubmitSuccess = () => {
+        this.setState({successRedirect: true});
+    };
 
     render() {
         const { onSubmit, mode } = this.props;

@@ -2,33 +2,38 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import uuidv4 from 'uuid/v4'
 import { reduxForm } from 'redux-form'
-import { SubmissionError } from 'redux-form'
+import { Redirect } from 'react-router'
 
 import PostForm from './PostForm'
 import * as actions from '../actions'
 
 class PostAddForm extends Component {
+    state = {
+        successRedirect: false
+    };
+
     submit = values => {
-        // if (!values.category) {
-        //     throw new SubmissionError({
-        //         category: 'Please select category',
-        //         _error: 'Error!'
-        //     });
-        // }
         values['timestamp'] = + new Date();
         values['author'] = this.props.user.name;
-        this.props.addPost(values);
+        this.props.addPost(values).then(() => this.setState({successRedirect: true}));
     };
 
     render() {
         return (
-            <PostForm mode="add" onSubmit={this.props.handleSubmit(this.submit)} />
+            <div>
+                {this.state.successRedirect && <Redirect to="/edit-post/success"/>}
+                <PostForm mode="add" onSubmit={this.props.handleSubmit(this.submit)} />
+            </div>
         );
     }
 }
 
 const Form = reduxForm({
     form: 'post-add',
+    // onSubmitSuccess: () => {
+    //     console.log('onSubmitSuccess called (yes, yes I do get called');
+    //     browserHistory.push('/');
+    // },
 })(PostAddForm);
 
 export default connect(

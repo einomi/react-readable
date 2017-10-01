@@ -4,6 +4,8 @@ import Post from './components/Post'
 import AddPost from './components/AddPost'
 import AddPostSuccess from './components/AddPostSuccess'
 import EditPost from './components/EditPost'
+import EditPostSuccess from './components/EditPostSuccess'
+import DeletePostSuccess from './components/DeletePostSuccess'
 
 export default [
     {
@@ -25,9 +27,19 @@ export default [
                 component: AddPostSuccess
             },
             {
+                path: '/edit-post/success',
+                exact: true,
+                component: EditPostSuccess
+            },
+            {
                 path: '/edit-post/:id',
                 exact: true,
                 component: EditPost
+            },
+            {
+                path: '/delete-success',
+                exact: true,
+                component: DeletePostSuccess
             },
             {
                 path: '/:category',

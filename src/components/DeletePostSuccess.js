@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 
-const AddPostSuccess = () => (
+const DeletePostSuccess = () => (
     <div className="page">
         <div className="container">
-            <div className="page__title title">Post was successfully added!</div>
+            <div className="page__title title">Post was successfully removed!</div>
             <Link to="/" className="link">Go to home page</Link>
         </div>
     </div>
 );
 
-export default AddPostSuccess
+export default DeletePostSuccess

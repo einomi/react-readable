@@ -85,3 +85,12 @@ export const editPost = (id, data) =>
         },
         body: JSON.stringify(data)
     }).then(res => res.json());
+
+export const deletePost = (id, data) =>
+    fetch(`${api}/posts/${id}`, {
+        method: 'DELETE',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+    }).then(res => res.json());

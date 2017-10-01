@@ -19,6 +19,8 @@ export const ADD_POST_SUCCESS_MESSAGE_SHOWN = 'ADD_POST_SUCCESS_MESSAGE_SHOWN';
 export const ADD_POST_FAILURE = 'ADD_POST_FAILURE';
 export const EDIT_POST_SUCCESS = 'EDIT_POST_SUCCESS';
 export const EDIT_POST_FAILURE = 'EDIT_POST_FAILURE';
+export const DELETE_POST_SUCCESS = 'DELETE_POST_SUCCESS';
+export const ERROR = 'ERROR';
 
 const ERROR_MESSAGE = 'Something went wrong.';
 
@@ -165,7 +167,7 @@ export const fetchCategories = () => dispatch => {
 };
 
 export const addPost = (data) => dispatch => {
-    api.addPost(data).then(
+    return api.addPost(data).then(
         addedPost => {
             dispatch({
                 type: ADD_POST_SUCCESS,
@@ -194,6 +196,21 @@ export const editPost = (id, data) => dispatch => {
         }, error => {
             dispatch({
                 type: EDIT_POST_FAILURE,
+                message: error.message || ERROR_MESSAGE,
+            });
+        }
+    );
+};
+
+export const deletePost = (id) => dispatch => {
+    return api.deletePost(id).then(
+        () => {
+            dispatch({
+                type: DELETE_POST_SUCCESS,
+            });
+        }, error => {
+            dispatch({
+                type: ERROR,
                 message: error.message || ERROR_MESSAGE,
             });
         }

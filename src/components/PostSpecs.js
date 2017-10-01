@@ -4,6 +4,7 @@ import classNames from 'classnames'
 import { Link } from 'react-router-dom'
 
 import Voting from './Voting'
+import DeletePostLink from './DeletePostLink'
 import * as actions from '../actions'
 import * as utils from '../utils'
 import "./PostSpecs.sass"
@@ -18,12 +19,12 @@ const PostSpecs = (props) => {
             <time className="post-specs__item iconic">
                 <span className="iconic__icon fa fa-clock-o"></span> {utils.defaultDateFormat(timestamp)}
             </time>
-            {author === user.name &&
-            <Link to={`/edit-post/${id}`} className="post-specs__item post-specs__edit link">Edit</Link>}
+            {author === user.name && <Link to={`/edit-post/${id}`} className="post-specs__item post-specs__edit link">Edit</Link>}
             <div className="post-specs__item iconic _comments">
                 <span className="iconic__icon fa fa-comment-o"></span> {commentCount || 'No Comments'}
             </div>
             <Voting className="post-specs__item" entryType="post" entry={props.post}/>
+            {author === user.name && <DeletePostLink id={id} className="post-specs__item post-specs__remove link"><span className="fa fa-remove"></span> Delete</DeletePostLink>}
         </div>
     );
 };
