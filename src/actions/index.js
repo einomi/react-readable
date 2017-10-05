@@ -1,29 +1,21 @@
 import * as api from '../utils/api'
 
 export const FETCH_POSTS_SUCCESS = 'FETCH_POSTS_SUCCESS';
-export const FETCH_POSTS_FAILURE = 'FETCH_POSTS_FAILURE';
 export const FETCH_POST_SUCCESS = 'FETCH_POST_SUCCESS';
-export const FETCH_POST_FAILURE = 'FETCH_POST_FAILURE';
 export const SORT_POSTS = 'SORT_POSTS';
 export const CHANGE_VOTE_SCORE_SUCCESS = 'CHANGE_VOTE_SCORE_SUCCESS';
-export const CHANGE_VOTE_SCORE_FAILURE = 'CHANGE_VOTE_SCORE_FAILURE';
 export const FETCH_COMMENTS_SUCCESS = 'FETCH_COMMENTS_SUCCESS';
 export const ADD_COMMENT_SUCCESS = 'ADD_COMMENT_SUCCESS';
-export const ADD_COMMENT_FAILURE = 'ADD_COMMENT_FAILURE';
 export const EDIT_COMMENT_SUCCESS = 'EDIT_COMMENT_SUCCESS';
-export const EDIT_COMMENT_FAILURE = 'EDIT_COMMENT_FAILURE';
 export const FETCH_CATEGORIES_SUCCESS = 'FETCH_CATEGORIES_SUCCESS';
-export const FETCH_CATEGORIES_FAILURE = 'FETCH_CATEGORIES_FAILURE';
 export const ADD_POST_SUCCESS = 'ADD_POST_SUCCESS';
 export const ADD_POST_SUCCESS_MESSAGE_SHOWN = 'ADD_POST_SUCCESS_MESSAGE_SHOWN';
-export const ADD_POST_FAILURE = 'ADD_POST_FAILURE';
 export const EDIT_POST_SUCCESS = 'EDIT_POST_SUCCESS';
-export const EDIT_POST_FAILURE = 'EDIT_POST_FAILURE';
 export const DELETE_POST_SUCCESS = 'DELETE_POST_SUCCESS';
 export const DELETE_COMMENT_SUCCESS = 'DELETE_COMMENT_SUCCESS';
 export const ERROR = 'ERROR';
 
-const ERROR_MESSAGE = 'Something went wrong.';
+const ERROR_MESSAGE = 'Error occurred while fetching data from remote server. Please, contact website\'s administrator..';
 
 export const fetchPosts = () => dispatch => {
     api.fetchAllPosts().then(
@@ -34,7 +26,7 @@ export const fetchPosts = () => dispatch => {
             });
         }, error => {
             dispatch({
-                type: FETCH_POSTS_FAILURE,
+                type: ERROR,
                 message: error.message || ERROR_MESSAGE,
             });
         }
@@ -50,7 +42,7 @@ export const fetchPost = (id) => dispatch => {
             });
         }, error => {
             dispatch({
-                type: FETCH_POST_FAILURE,
+                type: ERROR,
                 message: error.message || ERROR_MESSAGE,
             });
         }
@@ -78,7 +70,7 @@ export const changeVoteScore = (entryType, entryId, userId, option) => dispatch 
                     });
                 }, error => {
                     dispatch({
-                        type: CHANGE_VOTE_SCORE_FAILURE,
+                        type: ERROR,
                         message: error.message || ERROR_MESSAGE,
                     });
                 }
@@ -96,7 +88,7 @@ export const changeVoteScore = (entryType, entryId, userId, option) => dispatch 
                     });
                 }, error => {
                     dispatch({
-                        type: CHANGE_VOTE_SCORE_FAILURE,
+                        type: ERROR,
                         message: error.message || ERROR_MESSAGE,
                     });
                 }
@@ -115,6 +107,11 @@ export const fetchComments = (postId) => dispatch => {
                 type: FETCH_COMMENTS_SUCCESS,
                 comments
             });
+        }, error => {
+            dispatch({
+                type: ERROR,
+                message: error.message || ERROR_MESSAGE
+            });
         }
     );
 };
@@ -128,7 +125,7 @@ export const addComment = (data) => dispatch => {
             });
         }, error => {
             dispatch({
-                type: ADD_COMMENT_FAILURE,
+                type: ERROR,
                 message: error.message || ERROR_MESSAGE,
             });
         }
@@ -144,7 +141,7 @@ export const editComment = (id, data) => dispatch => {
             });
         }, error => {
             dispatch({
-                type: EDIT_COMMENT_FAILURE,
+                type: ERROR,
                 message: error.message || ERROR_MESSAGE,
             });
         }
@@ -160,7 +157,7 @@ export const fetchCategories = () => dispatch => {
             });
         }, error => {
             dispatch({
-                type: FETCH_CATEGORIES_FAILURE,
+                type: ERROR,
                 message: error.message || ERROR_MESSAGE,
             });
         }
@@ -176,7 +173,7 @@ export const addPost = (data) => dispatch => {
             });
         }, error => {
             dispatch({
-                type: ADD_POST_FAILURE,
+                type: ERROR,
                 message: error.message || ERROR_MESSAGE,
             });
         }
@@ -196,7 +193,7 @@ export const editPost = (id, data) => dispatch => {
             });
         }, error => {
             dispatch({
-                type: EDIT_POST_FAILURE,
+                type: ERROR,
                 message: error.message || ERROR_MESSAGE,
             });
         }

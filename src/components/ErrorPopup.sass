@@ -1,0 +1,44 @@
+.error-popup
+	position: fixed
+	top: 0
+	right: 0
+	bottom: 0
+	left: 0
+	background-color: rgba(#000, 0.8)
+	visibility: hidden
+	opacity: 0
+	font-size: 0
+	text-align: center
+	z-index: 100
+	&:before
+		content: ""
+		display: inline-block
+		vertical-align: middle
+		height: 100%
+		width: 0
+	&__inner
+		position: relative
+		display: inline-block
+		vertical-align: middle
+		width: 400px
+		border: 1px solid $color-dark
+		background-color: #fff
+		padding: 25px 15px
+		box-sizing: border-box
+	&__title
+		text-transform: uppercase
+		font-size: 18px
+		color: darkred
+		margin-bottom: 10px
+	&__text
+		font-size: 16px
+	&__close
+		position: absolute
+		top: 5px
+		right: 10px
+		font-size: 16px
+		color: $color-dark
+		cursor: pointer
+	&._active
+		opacity: 1
+		visibility: visible
