@@ -4,10 +4,12 @@ import classNames from 'classnames'
 import { Link } from 'react-router-dom'
 
 import Voting from './Voting'
-import DeletePostLink from './DeletePostLink'
+import DeleteLink from './DeleteLink'
 import * as actions from '../actions'
 import * as utils from '../utils'
 import "./PostSpecs.sass"
+
+const DELETE_QUESTION = 'Are you sure you want to delete this post?';
 
 const PostSpecs = (props) => {
     const { id, author, timestamp } = props.post;
@@ -24,7 +26,7 @@ const PostSpecs = (props) => {
                 <span className="iconic__icon fa fa-comment-o"></span> {commentCount || 'No Comments'}
             </div>
             <Voting className="post-specs__item" entryType="post" entry={props.post}/>
-            {author === user.name && <DeletePostLink id={id} className="post-specs__item post-specs__remove link"><span className="fa fa-remove"></span> Delete</DeletePostLink>}
+            {author === user.name && <DeleteLink id={id} className="post-specs__item post-specs__remove link" question={DELETE_QUESTION} clickAction={this.props.deletePost} successPath="/post-delete-success"><span className="fa fa-remove"></span> Delete</DeleteLink>}
         </div>
     );
 };

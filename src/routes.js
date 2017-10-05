@@ -37,7 +37,7 @@ export default [
                 component: EditPost
             },
             {
-                path: '/delete-success',
+                path: '/post-delete-success',
                 exact: true,
                 component: DeletePostSuccess
             },

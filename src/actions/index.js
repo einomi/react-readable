@@ -20,6 +20,7 @@ export const ADD_POST_FAILURE = 'ADD_POST_FAILURE';
 export const EDIT_POST_SUCCESS = 'EDIT_POST_SUCCESS';
 export const EDIT_POST_FAILURE = 'EDIT_POST_FAILURE';
 export const DELETE_POST_SUCCESS = 'DELETE_POST_SUCCESS';
+export const DELETE_COMMENT_SUCCESS = 'DELETE_COMMENT_SUCCESS';
 export const ERROR = 'ERROR';
 
 const ERROR_MESSAGE = 'Something went wrong.';
@@ -204,9 +205,26 @@ export const editPost = (id, data) => dispatch => {
 
 export const deletePost = (id) => dispatch => {
     return api.deletePost(id).then(
-        () => {
+        deletedPost => {
             dispatch({
                 type: DELETE_POST_SUCCESS,
+                deletedPost
+            });
+        }, error => {
+            dispatch({
+                type: ERROR,
+                message: error.message || ERROR_MESSAGE,
+            });
+        }
+    );
+};
+
+export const deleteComment = (id) => dispatch => {
+    return api.deleteComment(id).then(
+        deletedComment => {
+            dispatch({
+                type: DELETE_COMMENT_SUCCESS,
+                deletedComment
             });
         }, error => {
             dispatch({

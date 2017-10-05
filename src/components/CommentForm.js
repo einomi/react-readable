@@ -1,32 +1,40 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import uuidv4 from 'uuid/v4'
+import { reduxForm, Field } from 'redux-form'
 
 import * as actions from '../actions'
+import { required } from '../utils/validation'
+import FieldGroup from './FieldGroup'
 
 class CommentForm extends Component {
-    _onSend = (e) => {
-        e.preventDefault();
-        let data = {
+    submit = values => {
+        const extraValues = {
             id: uuidv4(),
             timestamp: + new Date(),
-            body: this.messageInput.value,
             author: this.props.user.name,
             parentId: this.props.post.id
         };
-        this.props.addComment(data);
+        console.log('values before', values);
+        values = Object.assign(values, extraValues);
+        console.log('values after', values);
+        this.props.addComment(values);
     };
 
     render() {
         return (
-            <form action="" className="form" onSubmit={this._onSend}>
+            <form action="" className="form" onSubmit={this.props.handleSubmit(this.submit)}>
                 <div className="form__title">Add new comment</div>
-                <textarea name="message" className="form__input i-textarea" required ref={input => this.messageInput = input}></textarea>
+                <Field component={FieldGroup} inputType="textarea" name="body" className="form__input i-textarea" validate={[required]} />
                 <button className="button">Add</button>
             </form>
         );
     }
 }
+
+CommentForm = reduxForm({
+    form: 'comment',
+})(CommentForm);
 
 export default connect(
     (state) => ({

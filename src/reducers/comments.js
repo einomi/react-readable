@@ -2,7 +2,8 @@ import {
     FETCH_COMMENTS_SUCCESS,
     CHANGE_VOTE_SCORE_SUCCESS,
     ADD_COMMENT_SUCCESS,
-    EDIT_COMMENT_SUCCESS
+    EDIT_COMMENT_SUCCESS,
+    DELETE_COMMENT_SUCCESS
 } from '../actions'
 
 const comments = (state = [], action) => {
@@ -29,6 +30,8 @@ const comments = (state = [], action) => {
                     ? action.editedComment
                     : comment
             );
+        case DELETE_COMMENT_SUCCESS:
+            return state.filter(comment => comment.id !== action.deletedComment.id);
         default:
             return state;
     }

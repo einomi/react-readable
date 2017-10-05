@@ -6,6 +6,9 @@ import './Comment.sass'
 import Voting from './Voting'
 import * as utils from '../utils'
 import * as actions from '../actions'
+import DeleteLink from './DeleteLink'
+
+const DELETE_QUESTION = 'Are you sure you want to delete this comment?';
 
 class Comment extends React.Component {
     state = {
@@ -50,6 +53,7 @@ class Comment extends React.Component {
                     <div className="comment-head__item comment__date">{utils.defaultDateFormat(timestamp)}</div>
                     {author === user.name && !this.state.editing && <div className="comment-head__item comment__edit link" onClick={this.setEditing}>Edit</div>}
                     <Voting className="comment-head__item comment-head__voting" entryType="comment" entry={comment}/>
+                    {author === user.name && <DeleteLink id={comment.id} className="post-specs__item post-specs__remove link" question={DELETE_QUESTION} clickAction={this.props.deleteComment}><span className="fa fa-remove"></span> Delete</DeleteLink>}
                 </div>
                 <div className="comment__author"><span className="iconic__icon fa fa-user-circle-o"></span> {author}</div>
                 {this.state.editing ? this.renderForm(body) : this.renderBody(body)}

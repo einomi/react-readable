@@ -5,7 +5,8 @@ import {
     SORT_POSTS,
     CHANGE_VOTE_SCORE_SUCCESS,
     ADD_POST_SUCCESS,
-    EDIT_POST_SUCCESS
+    EDIT_POST_SUCCESS,
+    DELETE_POST_SUCCESS,
 } from '../actions'
 
 const posts = (state = [], action) => {
@@ -20,7 +21,6 @@ const posts = (state = [], action) => {
             if (action.entryType !== 'post') {
                 return state;
             }
-
             return state.map(post => {
                 if (post.id === action.entry.id) {
                     return action.entry;
@@ -36,6 +36,8 @@ const posts = (state = [], action) => {
             return state.map((post, index) =>
                 post.id === action.editedPost.id ? action.editedPost : post
             );
+        case DELETE_POST_SUCCESS:
+            return state.filter(post => post.id !== action.deletedPost.id);
         default:
             return state;
     }

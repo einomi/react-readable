@@ -1,2 +1,4 @@
 export const required = value => value ? undefined : 'Required';
-export const categoryRequired = value => value ? undefined : 'Please, select category';
+export const categoryRequired = value => (
+    value !== 'none' && value !== undefined ? undefined : 'Please, select category'
+);

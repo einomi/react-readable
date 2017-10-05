@@ -1,4 +1,5 @@
 const api = "http://localhost:3001";
+const JSON_CONTENT_TYPE = 'application/json';
 
 // Generate a unique token for storing your data on the backend server.
 let token = localStorage.token;
@@ -6,7 +7,7 @@ if (!token)
     token = localStorage.token = Math.random().toString(36).substr(-8);
 
 const headers = {
-    'Accept': 'application/json',
+    'Accept': JSON_CONTENT_TYPE,
     'Authorization': token
 };
 
@@ -23,7 +24,7 @@ export const changePostVoteScore = (id, option) =>
         method: 'POST',
         headers: {
             ...headers,
-            'Content-Type': 'application/json'
+            'Content-Type': JSON_CONTENT_TYPE
         },
         body: JSON.stringify({ option })
     }).then(res => res.json());
@@ -33,7 +34,7 @@ export const changeCommentVoteScore = (id, option) =>
         method: 'POST',
         headers: {
             ...headers,
-            'Content-Type': 'application/json'
+            'Content-Type': JSON_CONTENT_TYPE
         },
         body: JSON.stringify({ option })
     }).then(res => res.json());
@@ -47,7 +48,7 @@ export const addComment = (data) =>
         method: 'POST',
         headers: {
             ...headers,
-            'Content-Type': 'application/json'
+            'Content-Type': JSON_CONTENT_TYPE
         },
         body: JSON.stringify(data)
     }).then(res => res.json());
@@ -57,7 +58,7 @@ export const editComment = (id, data) =>
         method: 'PUT',
         headers: {
             ...headers,
-            'Content-Type': 'application/json'
+            'Content-Type': JSON_CONTENT_TYPE
         },
         body: JSON.stringify(data)
     }).then(res => res.json());
@@ -71,7 +72,7 @@ export const addPost = (data) =>
         method: 'POST',
         headers: {
             ...headers,
-            'Content-Type': 'application/json'
+            'Content-Type': JSON_CONTENT_TYPE
         },
         body: JSON.stringify(data)
     }).then(res => res.json());
@@ -81,7 +82,7 @@ export const editPost = (id, data) =>
         method: 'PUT',
         headers: {
             ...headers,
-            'Content-Type': 'application/json'
+            'Content-Type': JSON_CONTENT_TYPE
         },
         body: JSON.stringify(data)
     }).then(res => res.json());
@@ -91,6 +92,15 @@ export const deletePost = (id, data) =>
         method: 'DELETE',
         headers: {
             ...headers,
-            'Content-Type': 'application/json'
+            'Content-Type': JSON_CONTENT_TYPE
+        },
+    }).then(res => res.json());
+
+export const deleteComment = (id, data) =>
+    fetch(`${api}/comments/${id}`, {
+        method: 'DELETE',
+        headers: {
+            ...headers,
+            'Content-Type': JSON_CONTENT_TYPE
         },
     }).then(res => res.json());
