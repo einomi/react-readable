@@ -13,7 +13,7 @@ const DELETE_QUESTION = 'Are you sure you want to delete this post?';
 
 const PostSpecs = (props) => {
     const { id, author, timestamp } = props.post;
-    const { user, className, commentCount } = props;
+    const { user, className, commentCount, deletePost } = props;
     return (
         <div className={classNames(className, 'post-specs')}>
             <div className="post-specs__item iconic"><span className="iconic__icon fa fa-user-circle-o"></span> {author}
@@ -21,12 +21,12 @@ const PostSpecs = (props) => {
             <time className="post-specs__item iconic">
                 <span className="iconic__icon fa fa-clock-o"></span> {utils.defaultDateFormat(timestamp)}
             </time>
-            {author === user.name && <Link to={`/edit-post/${id}`} className="post-specs__item post-specs__edit link">Edit</Link>}
             <div className="post-specs__item iconic _comments">
                 <span className="iconic__icon fa fa-comment-o"></span> {commentCount || 'No Comments'}
             </div>
             <Voting className="post-specs__item" entryType="post" entry={props.post}/>
-            {author === user.name && <DeleteLink id={id} className="post-specs__item post-specs__remove link" question={DELETE_QUESTION} clickAction={this.props.deletePost} successPath="/post-delete-success"><span className="fa fa-remove"></span> Delete</DeleteLink>}
+            {author === user.name && <Link to={`/edit-post/${id}`} className="post-specs__item post-specs__edit link"><span className="fa fa-edit"></span> Edit</Link>}
+            {author === user.name && <DeleteLink id={id} className="post-specs__item post-specs__remove link" question={DELETE_QUESTION} clickAction={deletePost} successPath="/post-delete-success"><span className="fa fa-remove icon-delete"></span> Delete</DeleteLink>}
         </div>
     );
 };

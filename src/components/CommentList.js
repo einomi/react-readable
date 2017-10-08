@@ -1,12 +1,12 @@
 import React from 'react'
 import classNames from 'classnames'
+import { connect } from 'react-redux'
 
 import './CommentList.sass'
 import Comment from './Comment'
-import CommentForm from './CommentForm'
+import CommentAddForm from './CommentAddForm'
 
 const CommentList = ({className, comments}) => {
-    // comments =
     const noCommets = <p className="comment-list__no-comments">There is no comments yet. Be the first!</p>;
     return (
         <div className={classNames(className, 'comment-list')}>
@@ -17,7 +17,7 @@ const CommentList = ({className, comments}) => {
                     return <Comment key={index} className="comment-list__item" comment={comment}/>;
                 })}
             </div>
-            <CommentForm />
+            <CommentAddForm/>
         </div>
     );
 };

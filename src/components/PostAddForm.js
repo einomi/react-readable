@@ -30,10 +30,6 @@ class PostAddForm extends Component {
 
 const Form = reduxForm({
     form: 'post-add',
-    // onSubmitSuccess: () => {
-    //     console.log('onSubmitSuccess called (yes, yes I do get called');
-    //     browserHistory.push('/');
-    // },
 })(PostAddForm);
 
 export default connect(
