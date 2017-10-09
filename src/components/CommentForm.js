@@ -1,5 +1,6 @@
 import React from 'react'
 import { Field } from 'redux-form'
+import PropTypes from 'prop-types'
 
 import { required } from '../utils/validation'
 import FieldGroup from './FieldGroup'
@@ -11,5 +12,10 @@ const CommentForm = ({onSubmit, mode}) => (
         <button className="button">{mode === 'edit' ? 'Save' : 'Add'}</button>
     </form>
 );
+
+CommentForm.propTypes = {
+    onSubmit: PropTypes.func.isRequired,
+    mode: PropTypes.string.isRequired
+};
 
 export default CommentForm

@@ -1,12 +1,18 @@
 import React from 'react'
-import {connect} from 'react-redux'
-import {withRouter} from 'react-router'
-import {Link} from 'react-router-dom'
+import { connect } from 'react-redux'
+import { withRouter } from 'react-router'
+import { Link } from 'react-router-dom'
 import startCase from 'lodash/startCase'
+import PropTypes from 'prop-types'
 
 import './Breadcrumbs.sass'
 
 class Breadcrumbs extends React.Component {
+    static propTypes = {
+        pathname: PropTypes.string.isRequired,
+        post: PropTypes.object.isRequired,
+    };
+
     state = {
         currentPath: this.props.path
     };
@@ -58,7 +64,7 @@ class Breadcrumbs extends React.Component {
     }
 }
 
-function mapStateToProps(state, {location, match}) {
+function mapStateToProps(state, { location, match }) {
     const pathname = location.pathname;
     const post = state.post.entity;
     return {

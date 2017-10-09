@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import classNames from 'classnames'
+import PropTypes from 'prop-types'
 
 import './Comment.sass'
 import Voting from './Voting'
@@ -12,6 +13,12 @@ import CommentEditForm from './CommentEditForm'
 const DELETE_QUESTION = 'Are you sure you want to delete this comment?';
 
 class Comment extends React.Component {
+    static propTypes = {
+        className: PropTypes.string,
+        comment: PropTypes.object.isRequired,
+        user: PropTypes.object.isRequired
+    };
+
     state = {
         editing: false
     };

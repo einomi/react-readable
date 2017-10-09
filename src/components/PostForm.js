@@ -1,12 +1,19 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Field } from 'redux-form'
+import PropTypes from 'prop-types'
 
 import * as actions from '../actions'
 import FieldGroup from './FieldGroup'
 import { required, categoryRequired } from '../utils/validation'
 
 class PostForm extends Component {
+    static propTypes = {
+        categories: PropTypes.arrayOf(PropTypes.object).isRequired,
+        mode: PropTypes.string.isRequired,
+        onSubmit: PropTypes.func.isRequired
+    };
+
     componentDidMount() {
         this.props.fetchCategories();
     }

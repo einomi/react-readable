@@ -1,19 +1,25 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
 import classNames from 'classnames'
+import PropTypes from 'prop-types'
 
 import PostSpecs from './PostSpecs'
 import * as api from '../utils/api'
 import './PostExcerpt.sass';
 
 class PostExcerpt extends Component {
+    static propTypes = {
+        post: PropTypes.object.isRequired,
+        className: PropTypes.string
+    };
+
     state = {
-        commentsCount: 0
+        commentCount: 0
     };
 
     componentDidMount() {
         api.fetchComments(this.props.post.id).then(comments => {
-            const commentCount = comments.length;
+            const commentCount = comments.length || 0;
             this.setState({ commentCount });
         });
     }

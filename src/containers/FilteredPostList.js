@@ -14,7 +14,7 @@ class FilteredPostList extends Component {
 
     render() {
         const { posts, category } = this.props;
-        if (posts.length === 0) {
+        if (category && posts.length === 0) {
             return <NoPosts category={category} />;
         }
         return <PostList posts={posts}/>;

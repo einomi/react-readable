@@ -1,7 +1,13 @@
 import React, { Component } from 'react'
 import { Redirect } from 'react-router'
+import PropTypes from 'prop-types'
 
 class DeleteLink extends Component {
+    static propTypes = {
+        id: PropTypes.string.isRequired,
+        className: PropTypes.string
+    };
+
     state = {
         deleteSuccess: false
     };

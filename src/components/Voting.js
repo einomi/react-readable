@@ -13,6 +13,7 @@ class Voting extends Component {
     static propTypes = {
         entryType: PropTypes.string.isRequired,
         entry: PropTypes.object.isRequired,
+        user: PropTypes.object.isRequired
     };
 
     state = {

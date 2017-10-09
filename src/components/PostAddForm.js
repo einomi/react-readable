@@ -3,11 +3,18 @@ import { connect } from 'react-redux'
 import uuidv4 from 'uuid/v4'
 import { reduxForm } from 'redux-form'
 import { Redirect } from 'react-router'
+import PropTypes from 'prop-types'
 
 import PostForm from './PostForm'
 import * as actions from '../actions'
 
 class PostAddForm extends Component {
+    static propTypes = {
+        categories: PropTypes.arrayOf(PropTypes.object).isRequired,
+        user: PropTypes.object.isRequired,
+        initialValues: PropTypes.object.isRequired,
+    };
+
     state = {
         successRedirect: false
     };

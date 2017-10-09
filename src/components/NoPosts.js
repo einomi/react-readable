@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import PropTypes from 'prop-types'
 
 const NoPosts = ({ category }) => (
     <div className="page page-error">
@@ -9,5 +10,9 @@ const NoPosts = ({ category }) => (
         </div>
     </div>
 );
+
+NoPosts.propTypes = {
+    category: PropTypes.string.isRequired
+};
 
 export default NoPosts

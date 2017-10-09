@@ -1,5 +1,6 @@
 import React from 'react'
 import classNames from 'classnames'
+import PropTypes from 'prop-types'
 
 import './CommentList.sass'
 import Comment from './Comment'
@@ -19,6 +20,11 @@ const CommentList = ({className, comments}) => {
             <CommentAddForm/>
         </div>
     );
+};
+
+CommentList.propTypes = {
+    className: PropTypes.string,
+    comments: PropTypes.arrayOf(PropTypes.object).isRequired
 };
 
 export default CommentList

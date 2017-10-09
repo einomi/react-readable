@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import classNames from 'classnames'
 import { Link } from 'react-router-dom'
+import PropTypes from 'prop-types'
 
 import Voting from './Voting'
 import DeleteLink from './DeleteLink'
@@ -29,6 +30,13 @@ const PostSpecs = (props) => {
             {author === user.name && <DeleteLink id={id} className="post-specs__item post-specs__remove link" question={DELETE_QUESTION} clickAction={deletePost} successPath="/post-delete-success"><span className="fa fa-remove icon-delete"></span> Delete</DeleteLink>}
         </div>
     );
+};
+
+PostSpecs.propTypes = {
+    className: PropTypes.string,
+    post: PropTypes.object.isRequired,
+    commentCount: PropTypes.number.isRequired,
+    user: PropTypes.object.isRequired
 };
 
 export default connect(

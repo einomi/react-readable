@@ -6,6 +6,10 @@ import classNames from 'classnames'
 import './ErrorPopup.sass'
 
 class ErrorPopup extends Component {
+    static propTypes = {
+        message: PropTypes.string
+    };
+
     state = {
         visible: false
     };
@@ -31,10 +35,6 @@ class ErrorPopup extends Component {
         );
     }
 }
-
-ErrorPopup.propTypes = {
-    message: PropTypes.string
-};
 
 export default connect(
     state => ({

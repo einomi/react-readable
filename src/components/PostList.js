@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
+import PropTypes from 'prop-types'
 
 import PostExcerpt from './PostExcerpt'
 import Sorting from './Sorting'
@@ -18,5 +19,9 @@ const PostList = ({ posts }) => (
         </div>
     </div>
 );
+
+PostList.propTypes = {
+    posts: PropTypes.arrayOf(PropTypes.object).isRequired
+};
 
 export default PostList

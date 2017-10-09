@@ -1,11 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom';
+import PropTypes from 'prop-types'
 
 import * as actions from '../actions';
 import './Sorting.sass';
 
 class Sorting extends Component {
+    static propTypes = {
+        sortPosts: PropTypes.func.isRequired
+    };
+
     handleChange = (e) => {
         this.props.sortPosts(e.target.value);
     };
