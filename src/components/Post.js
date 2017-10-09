@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { withRouter } from 'react-router-dom'
+import { Redirect, withRouter } from 'react-router-dom'
 
 import * as actions from '../actions'
 import PostSpecs from './PostSpecs'
@@ -14,6 +14,9 @@ class Post extends Component {
     }
 
     render() {
+        if (this.props.post.notFound) {
+            return <Redirect to="/404"/>;
+        }
         const { title, body } = this.props.post;
         const comments = this.props.comments;
         return (

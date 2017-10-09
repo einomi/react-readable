@@ -16,6 +16,7 @@ class CommentAddForm extends Component {
         };
         values = Object.assign(values, extraValues);
         this.props.addComment(values);
+        this.props.reset();
     };
 
     render() {

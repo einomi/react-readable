@@ -6,6 +6,7 @@ import AddPostSuccess from './components/AddPostSuccess'
 import EditPost from './components/EditPost'
 import EditPostSuccess from './components/EditPostSuccess'
 import DeletePostSuccess from './components/DeletePostSuccess'
+import Page404 from './components/Page404'
 
 export default [
     {
@@ -15,6 +16,11 @@ export default [
                 path: '/',
                 exact: true,
                 component: FilteredPostList
+            },
+            {
+                path: '/404',
+                exact: true,
+                component: Page404
             },
             {
                 path: '/add-post',

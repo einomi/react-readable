@@ -1,7 +1,10 @@
+import isEmpty from 'lodash/isEmpty'
+
 import * as api from '../utils/api'
 
 export const FETCH_POSTS_SUCCESS = 'FETCH_POSTS_SUCCESS';
 export const FETCH_POST_SUCCESS = 'FETCH_POST_SUCCESS';
+export const FETCH_POST_NOT_FOUND = 'FETCH_POST_NOT_FOUND';
 export const SORT_POSTS = 'SORT_POSTS';
 export const CHANGE_VOTE_SCORE_SUCCESS = 'CHANGE_VOTE_SCORE_SUCCESS';
 export const FETCH_COMMENTS_SUCCESS = 'FETCH_COMMENTS_SUCCESS';
@@ -36,10 +39,16 @@ export const fetchPosts = () => dispatch => {
 export const fetchPost = (id) => dispatch => {
     api.fetchPost(id).then(
         post => {
-            dispatch({
-                type: FETCH_POST_SUCCESS,
-                post,
-            });
+            if (isEmpty(post) || post.error) {
+                dispatch({
+                    type: FETCH_POST_NOT_FOUND,
+                });
+            } else {
+                dispatch({
+                    type: FETCH_POST_SUCCESS,
+                    post,
+                });
+            }
         }, error => {
             dispatch({
                 type: ERROR,

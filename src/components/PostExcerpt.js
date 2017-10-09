@@ -23,7 +23,7 @@ class PostExcerpt extends Component {
         return (
             <div className={classNames(className, 'post-excerpt')}>
                 <div className="post-excerpt__title">
-                    <Link to={`/${post.category}/${post.id}`} className="post-excerpt__title-link link">{post.title}</Link>
+                    <Link to={`/${post.category}/${post.id}`} className="post-excerpt__title-link">{post.title}</Link>
                 </div>
                 <PostSpecs className="post-excerpt__specs" post={post} commentCount={this.state.commentCount}/>
             </div>

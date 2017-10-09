@@ -5,6 +5,7 @@ import { withRouter } from 'react-router-dom';
 import * as actions from '../actions';
 import { getFilteredPosts } from '../reducers'
 import PostList from '../components/PostList'
+import NoPosts from '../components/NoPosts'
 
 class FilteredPostList extends Component {
     componentDidMount() {
@@ -12,8 +13,10 @@ class FilteredPostList extends Component {
     }
 
     render() {
-        const { posts } = this.props;
-
+        const { posts, category } = this.props;
+        if (posts.length === 0) {
+            return <NoPosts category={category} />;
+        }
         return <PostList posts={posts}/>;
     }
 }
@@ -22,6 +25,7 @@ function mapStateToProps(state, { match }) {
     const category = match.params.category;
     return {
         posts: getFilteredPosts(state, category),
+        category
     };
 }
 
