@@ -28,6 +28,9 @@ class Breadcrumbs extends React.Component {
                     });
                     break;
                 case 1:
+                    if (item === 'edit-post') {
+                        break;
+                    }
                     if (item === '') {
                         return;
                     }

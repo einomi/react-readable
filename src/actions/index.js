@@ -1,3 +1,5 @@
+import isEmpty from 'lodash/isEmpty'
+
 import * as api from '../utils/api'
 
 export const FETCH_POSTS_SUCCESS = 'FETCH_POSTS_SUCCESS';
@@ -41,7 +43,7 @@ export const fetchPost = (id) => dispatch => {
     });
     api.fetchPost(id).then(
         post => {
-            if (post.error) {
+            if (isEmpty(post) || post.error) {
                 dispatch({
                     type: FETCH_POST_NOT_FOUND
                 });

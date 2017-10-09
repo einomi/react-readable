@@ -13,7 +13,7 @@ const store = createStore(rootReducer,
     {
         user: { // Fake user. Authentication/authorization is not implemented in this app
             id: 'fakeUserId',
-            name: 'Andrew',
+            name: 'admin',
             voted: {
                 post: {},
                 comment: {}

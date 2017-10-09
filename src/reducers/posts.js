@@ -1,4 +1,4 @@
-import sortBy from 'sort-by'
+import { combineReducers } from 'redux'
 
 import {
     FETCH_POSTS_SUCCESS,
@@ -9,14 +9,10 @@ import {
     DELETE_POST_SUCCESS,
 } from '../actions'
 
-const posts = (state = [], action) => {
+const entities = (state = [], action) => {
     switch (action.type) {
         case FETCH_POSTS_SUCCESS:
             return action.posts;
-        case SORT_POSTS:
-            let newState = [...state];
-            newState.sort(sortBy(action.param));
-            return newState;
         case CHANGE_VOTE_SCORE_SUCCESS:
             if (action.entryType !== 'post') {
                 return state;
@@ -43,15 +39,31 @@ const posts = (state = [], action) => {
     }
 };
 
+const sortBy = (state = {param: 'timestamp', order: 'desc'}, action) => {
+    switch (action.type) {
+        case SORT_POSTS:
+            return {
+                ...state,
+                param: action.param,
+                order: action.param === 'timestamp' ? 'desc' : 'asc'
+            };
+        default:
+            return state;
+    }
+};
+
 export const getFilteredPosts = (state, category) => {
     if (category) {
-        return state.filter(post => post.category === category);
+        return state.entities.filter(post => post.category === category);
     }
 
-    return state;
+    return state.entities;
 };
 
 export const getPost = (state, id) =>
-state.length && state.filter(post => post.id === id)[0];
+    state.entities.length && state.entities.filter(post => post.id === id)[0];
 
-export default posts
+export default combineReducers({
+    entities,
+    sortBy
+})

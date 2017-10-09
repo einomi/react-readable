@@ -8,7 +8,7 @@ import './Sorting.sass';
 
 class Sorting extends Component {
     static propTypes = {
-        sortPosts: PropTypes.func.isRequired
+        sortBy: PropTypes.object
     };
 
     handleChange = (e) => {
@@ -16,8 +16,9 @@ class Sorting extends Component {
     };
 
     render() {
+        const { sortBy } = this.props;
         return (
-            <select className="sorting" onChange={this.handleChange} defaultValue={undefined || 'none'}>
+            <select className="sorting" onChange={this.handleChange} defaultValue={sortBy.param || 'none'}>
                 <option value="none" disabled>Sort by</option>
                 <option value="title">Title</option>
                 <option value="timestamp">Date</option>
@@ -28,7 +29,8 @@ class Sorting extends Component {
 }
 
 export default withRouter(connect(
-    null, {
-        sortPosts: actions.sortPosts
-    }
+    state => ({
+        sortBy: state.posts.sortBy
+    }),
+    actions
 )(Sorting));

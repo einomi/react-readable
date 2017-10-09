@@ -24,6 +24,8 @@ class PostExcerpt extends Component {
         });
     }
 
+
+
     render() {
         const { className, post } = this.props;
         return (
