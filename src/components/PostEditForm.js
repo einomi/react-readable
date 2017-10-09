@@ -37,7 +37,7 @@ PostEditForm = reduxForm({
 
 const mapStateToProps = (state, { match }) => {
     const id = match.params.id;
-    const post = state.post;
+    const post = state.post.entity;
     const initialValues = {
         title: post.title,
         body: post.body,

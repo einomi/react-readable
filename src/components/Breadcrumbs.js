@@ -60,7 +60,7 @@ class Breadcrumbs extends React.Component {
 
 function mapStateToProps(state, {location, match}) {
     const pathname = location.pathname;
-    const post = state.post;
+    const post = state.post.entity;
     return {
         pathname,
         post

@@ -35,7 +35,7 @@ const Form = reduxForm({
 export default connect(
     state => ({
         user: state.user,
-        post: state.post
+        post: state.post.entity
     }),
     actions
 )(Form);

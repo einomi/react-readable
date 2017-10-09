@@ -1,6 +1,5 @@
 import React from 'react'
 import classNames from 'classnames'
-import { connect } from 'react-redux'
 
 import './CommentList.sass'
 import Comment from './Comment'

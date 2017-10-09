@@ -36,6 +36,7 @@ export default connect(
     state => {
         const initialValues = {
             id: uuidv4(),
+            category: 'none'
         };
         return {
             categories: state.categories,

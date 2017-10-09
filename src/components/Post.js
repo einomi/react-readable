@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Redirect, withRouter } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 
 import * as actions from '../actions'
 import PostSpecs from './PostSpecs'
 import './Post.sass';
 import CommentList from './CommentList'
+import Page404 from './Page404'
 
 class Post extends Component {
     componentDidMount() {
@@ -14,8 +15,11 @@ class Post extends Component {
     }
 
     render() {
-        if (this.props.post.notFound) {
-            return <Redirect to="/404"/>;
+        if (this.props.notFound) {
+            return <Page404/>;
+        }
+        if (Object.keys(this.props.post).length === 0) {
+            return <div></div>;
         }
         const { title, body } = this.props.post;
         const comments = this.props.comments;
@@ -41,17 +45,13 @@ const mapStateToProps = (state, { match }) => {
     return {
         id,
         posts: state.posts,
-        post: state.post,
+        post: state.post.entity,
+        notFound: state.post.notFound,
         comments: state.comments
     };
 };
 
-const mapDispatchToProps = {
-    fetchPost: actions.fetchPost,
-    fetchComments: actions.fetchComments
-};
-
 export default withRouter(connect(
     mapStateToProps,
-    mapDispatchToProps
+    actions
 )(Post))
