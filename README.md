@@ -1,6 +1,9 @@
 # React Readable
 
-This is Udacity training project. [Create React App](https://github.com/facebookincubator/create-react-app) was used for development.
+This is Udacity training project. 
+
+## Create React App
+[Create React App](https://github.com/facebookincubator/create-react-app) was used for starter application.
 
 ## Backend server
 Please, install and run [local backend development server](https://github.com/udacity/reactnd-project-readable-starter)
